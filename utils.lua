@@ -1,12 +1,12 @@
 local py = require 'fb.python' -- Required for plotting
 
 -- Import python libraries
-py.exec([=[
-import numpy as np
-from mpl_toolkits.mplot3d import Axes3D
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-]=])
+-- py.exec([=[
+-- import numpy as np
+-- from mpl_toolkits.mplot3d import Axes3D
+-- import matplotlib.pyplot as plt
+-- import matplotlib.patches as patches
+-- ]=])
 
 local utils = {}
 
@@ -189,75 +189,75 @@ end
 
 -- Requires fb.python
 function utils.plot(surface, points, detectedFace)
-py.exec([=[
-if preds.shape[1]==2:
-    fig = plt.figure()
-    ax = fig.add_subplot(1, 1, 1)
-    ax.imshow(input.swapaxes(0,1).swapaxes(1,2))
-    ax.plot(preds[0:17,0],preds[0:17,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
-    ax.plot(preds[17:22,0],preds[17:22,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
-    ax.plot(preds[22:27,0],preds[22:27,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
-    ax.plot(preds[27:31,0],preds[27:31,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
-    ax.plot(preds[31:36,0],preds[31:36,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
-    ax.plot(preds[36:42,0],preds[36:42,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
-    ax.plot(preds[42:48,0],preds[42:48,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
-    ax.plot(preds[48:60,0],preds[48:60,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
-    ax.plot(preds[60:68,0],preds[60:68,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
-
-    if ('detected_face' in vars() or 'detected_face' in globals()) and (detected_face is not None):
-        ax.add_patch(
-            patches.Rectangle(
-                (detected_face[0], detected_face[1]),
-                detected_face[2],
-                detected_face[3],
-                fill=False,
-                edgecolor="red"
-            )
-        )
-
-    plt.show()
-elif preds.shape[1]==3:
-    fig = plt.figure(figsize=plt.figaspect(.5))
-    ax = fig.add_subplot(1, 2, 1)
-    ax.imshow(input.swapaxes(0,1).swapaxes(1,2))
-    ax.plot(preds[0:17,0],preds[0:17,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
-    ax.plot(preds[17:22,0],preds[17:22,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
-    ax.plot(preds[22:27,0],preds[22:27,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
-    ax.plot(preds[27:31,0],preds[27:31,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
-    ax.plot(preds[31:36,0],preds[31:36,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
-    ax.plot(preds[36:42,0],preds[36:42,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
-    ax.plot(preds[42:48,0],preds[42:48,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
-    ax.plot(preds[48:60,0],preds[48:60,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
-    ax.plot(preds[60:68,0],preds[60:68,1],marker='o',markersize=6,linestyle='-',color='w',lw=2) 
-    ax.axis('off')
-
-    if ('detected_face' in vars() or 'detected_face' in globals()) and (detected_face is not None):
-        ax.add_patch(
-            patches.Rectangle(
-                (detected_face[0], detected_face[1]),
-                detected_face[2],
-                detected_face[3],
-                fill=False,
-                edgecolor="red"
-            )
-        )
-
-    ax = fig.add_subplot(1, 2, 2, projection='3d')
-    surf = ax.scatter(preds[:,0]*1.2,preds[:,1],preds[:,2],c="cyan", alpha=1.0, edgecolor='b')
-    ax.plot3D(preds[:17,0]*1.2,preds[:17,1], preds[:17,2], color='blue' )
-    ax.plot3D(preds[17:22,0]*1.2,preds[17:22,1],preds[17:22,2], color='blue')
-    ax.plot3D(preds[22:27,0]*1.2,preds[22:27,1],preds[22:27,2], color='blue')
-    ax.plot3D(preds[27:31,0]*1.2,preds[27:31,1],preds[27:31,2], color='blue')
-    ax.plot3D(preds[31:36,0]*1.2,preds[31:36,1],preds[31:36,2], color='blue')
-    ax.plot3D(preds[36:42,0]*1.2,preds[36:42,1],preds[36:42,2], color='blue')
-    ax.plot3D(preds[42:48,0]*1.2,preds[42:48,1],preds[42:48,2], color='blue')
-    ax.plot3D(preds[48:,0]*1.2,preds[48:,1],preds[48:,2], color='blue' )
-    
-    ax.view_init(elev=90., azim=90.)
-    ax.set_xlim(ax.get_xlim()[::-1])
-    plt.show()
-
-]=],{input=surface:float():view(3,256,256), preds = points, detected_face = detectedFace})	
+-- py.exec([=[
+-- if preds.shape[1]==2:
+--     fig = plt.figure()
+--     ax = fig.add_subplot(1, 1, 1)
+--     ax.imshow(input.swapaxes(0,1).swapaxes(1,2))
+--     ax.plot(preds[0:17,0],preds[0:17,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
+--     ax.plot(preds[17:22,0],preds[17:22,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
+--     ax.plot(preds[22:27,0],preds[22:27,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
+--     ax.plot(preds[27:31,0],preds[27:31,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
+--     ax.plot(preds[31:36,0],preds[31:36,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
+--     ax.plot(preds[36:42,0],preds[36:42,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
+--     ax.plot(preds[42:48,0],preds[42:48,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
+--     ax.plot(preds[48:60,0],preds[48:60,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
+--     ax.plot(preds[60:68,0],preds[60:68,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
+-- 
+--     if detected_face is not None:
+--         ax.add_patch(
+--             patches.Rectangle(
+--                 (detected_face[0], detected_face[1]),
+--                 detected_face[2],
+--                 detected_face[3],
+--                 fill=False,
+--                 edgecolor="red"
+--             )
+--         )
+-- 
+--     plt.show()
+-- elif preds.shape[1]==3:
+--     fig = plt.figure(figsize=plt.figaspect(.5))
+--     ax = fig.add_subplot(1, 2, 1)
+--     ax.imshow(input.swapaxes(0,1).swapaxes(1,2))
+--     ax.plot(preds[0:17,0],preds[0:17,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
+--     ax.plot(preds[17:22,0],preds[17:22,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
+--     ax.plot(preds[22:27,0],preds[22:27,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
+--     ax.plot(preds[27:31,0],preds[27:31,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
+--     ax.plot(preds[31:36,0],preds[31:36,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
+--     ax.plot(preds[36:42,0],preds[36:42,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
+--     ax.plot(preds[42:48,0],preds[42:48,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
+--     ax.plot(preds[48:60,0],preds[48:60,1],marker='o',markersize=6,linestyle='-',color='w',lw=2)
+--     ax.plot(preds[60:68,0],preds[60:68,1],marker='o',markersize=6,linestyle='-',color='w',lw=2) 
+--     ax.axis('off')
+-- 
+--     if detected_face is not None:
+--         ax.add_patch(
+--             patches.Rectangle(
+--                 (detected_face[0], detected_face[1]),
+--                 detected_face[2],
+--                 detected_face[3],
+--                 fill=False,
+--                 edgecolor="red"
+--             )
+--         )
+-- 
+--     ax = fig.add_subplot(1, 2, 2, projection='3d')
+--     surf = ax.scatter(preds[:,0]*1.2,preds[:,1],preds[:,2],c="cyan", alpha=1.0, edgecolor='b')
+--     ax.plot3D(preds[:17,0]*1.2,preds[:17,1], preds[:17,2], color='blue' )
+--     ax.plot3D(preds[17:22,0]*1.2,preds[17:22,1],preds[17:22,2], color='blue')
+--     ax.plot3D(preds[22:27,0]*1.2,preds[22:27,1],preds[22:27,2], color='blue')
+--     ax.plot3D(preds[27:31,0]*1.2,preds[27:31,1],preds[27:31,2], color='blue')
+--     ax.plot3D(preds[31:36,0]*1.2,preds[31:36,1],preds[31:36,2], color='blue')
+--     ax.plot3D(preds[36:42,0]*1.2,preds[36:42,1],preds[36:42,2], color='blue')
+--     ax.plot3D(preds[42:48,0]*1.2,preds[42:48,1],preds[42:48,2], color='blue')
+--     ax.plot3D(preds[48:,0]*1.2,preds[48:,1],preds[48:,2], color='blue' )
+--     
+--     ax.view_init(elev=90., azim=90.)
+--     ax.set_xlim(ax.get_xlim()[::-1])
+--     plt.show()
+-- 
+-- ]=],{input=surface:float():view(3,256,256), preds = points, detected_face = detectedFace})	
 end
 
 function utils.readpts(file_path)
@@ -333,29 +333,29 @@ function utils.getFileList(opts)
 end
 
 function utils.calculateMetrics(dists)
-local errors = torch.mean(dists,1):view(dists:size(2))
-py.exec([=[
-axes1 = np.linspace(0,1,1000)
-axes2 = np.zeros(1000)
-print(errors.shape[0])
-for i in range(1000):
-    axes2[i] = (errors<axes1[i]).sum()/float(errors.shape[0])
-
-plt.xlim(0,7)
-plt.ylim(0,100)
-plt.yticks(np.arange(0,110,10))
-plt.xticks(np.arange(0,8,1))
-
-plt.grid()
-plt.title('NME (%)', fontsize=20)
-plt.xlabel('NME (%)', fontsize=16)
-plt.ylabel('Test Images (%)', fontsize=16)
-plt.plot(axes1*100,axes2*100,'b-',label='FAN (Ours)',lw=3)
-plt.legend(loc=4, fontsize=16)
-
-plt.show()
-print('AUC: ',np.sum(axes2[:70])/70)
-]=],{errors = errors})
+-- local errors = torch.mean(dists,1):view(dists:size(2))
+-- py.exec([=[
+-- axes1 = np.linspace(0,1,1000)
+-- axes2 = np.zeros(1000)
+-- print(errors.shape[0])
+-- for i in range(1000):
+--     axes2[i] = (errors<axes1[i]).sum()/float(errors.shape[0])
+-- 
+-- plt.xlim(0,7)
+-- plt.ylim(0,100)
+-- plt.yticks(np.arange(0,110,10))
+-- plt.xticks(np.arange(0,8,1))
+-- 
+-- plt.grid()
+-- plt.title('NME (%)', fontsize=20)
+-- plt.xlabel('NME (%)', fontsize=16)
+-- plt.ylabel('Test Images (%)', fontsize=16)
+-- plt.plot(axes1*100,axes2*100,'b-',label='FAN (Ours)',lw=3)
+-- plt.legend(loc=4, fontsize=16)
+-- 
+-- plt.show()
+-- print('AUC: ',np.sum(axes2[:70])/70)
+-- ]=],{errors = errors})
 end
 
 return utils

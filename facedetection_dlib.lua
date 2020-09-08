@@ -19,7 +19,7 @@ function FaceDetector:detect(img)
 	local py_img = py.ref(img)
 	py_img.flags.writeable = 1
 	local dets = self.detector(py_img,py.int(1))
-	local detections = py.reval('[np.asarray([d.left(), d.top(), d.right(), d.bottom()]) for i, d in enumerate(dets)]',{dets=dets})	
+	local detections = py.reval('[np.asarray([d.left(), d.top(), d.right(), d.bottom()],dtype=float) for i, d in enumerate(dets)]',{dets=dets,np=self.np})	
 	
 	return py.eval(detections)
 end
